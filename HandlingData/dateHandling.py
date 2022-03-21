@@ -33,15 +33,17 @@ def filling_nan_values(df):
             df[col_name] = df[col_name].fillna(df[col_name].mean())
         return df
     else:
-        df = df.fillna(-sys.maxsize)
-        for i in range(len(df.columns)):
-            col_name = df.columns[i]
-            for j in range(len(df[df.columns[0]])):
-                if j == 0 and df[col_name][j] == -sys.maxsize:
-                    df[col_name][j] = df[col_name].mean()
-                if df[col_name][j] == -sys.maxsize and j - 1 >= 0:
-                    k = j - 1
-                    df[col_name][j] = df[col_name][k]
+        df =df.ffill()
+        df=df.bfill()
+        # df = df.fillna(-sys.maxsize)
+        # for i in range(len(df.columns)):
+        #     col_name = df.columns[i]
+        #     for j in range(len(df[df.columns[0]])):
+        #         if j == 0 and df[col_name][j] == -sys.maxsize:
+        #             df[col_name][j] = df[col_name].mean()
+        #         if df[col_name][j] == -sys.maxsize and j - 1 >= 0:
+        #             k = j - 1
+        #             df[col_name][j] = df[col_name][k]
         return df
 
 
